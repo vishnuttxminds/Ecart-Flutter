@@ -47,7 +47,7 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
               ),
             )
           : Container(
-              color: Colors.white,
+              color: Colors.cyan.shade50,
               child: SizedBox(
                   child: GridView.builder(
                       padding: const EdgeInsets.all(8),
@@ -63,7 +63,10 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
                         final product = productListItems[index];
                         debugPrint('Favorite items context: $context');
                         return Container(
-                            color: Colors.white,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.white,
+                            ),
                             child: GestureDetector(
                               onTap: () {
                                 Navigator.pushNamed(
@@ -90,8 +93,9 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
                                           Text(product.title ?? '',
                                               maxLines: 1),
                                           const SizedBox(height: 5),
-                                           Padding(
-                                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 8),
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
@@ -99,7 +103,8 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
                                               children: [
                                                 Text(
                                                     '₹${product.price?.toStringAsFixed(2) ?? '0.00'}',
-                                                    overflow: TextOverflow.ellipsis,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
                                                     style: const TextStyle(
                                                         fontSize: 14,
                                                         fontWeight:

@@ -8,6 +8,7 @@ import 'package:lottie/lottie.dart';
 
 import '../models/model_produts_list.dart';
 import '../providers/cart_provider.dart';
+import '../utils/shared_preferences.dart';
 import '../utils/sqflite_storage.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -60,6 +61,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final cartCount = ref.watch(cartItemCountProvider);
+    if (cartCount == 0) {
+      SharedPreferencesCustom.saveShowcaseFirstLocal(false);
+    }
+
     return Scaffold(
       appBar: AppBar(
         titleSpacing: -2,
