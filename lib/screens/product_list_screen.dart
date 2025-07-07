@@ -93,7 +93,7 @@ class _ProductsListScreenState extends ConsumerState<ProductsListScreen> {
                       child: Stack(
                         children: [
                           Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Image.network(
@@ -104,9 +104,13 @@ class _ProductsListScreenState extends ConsumerState<ProductsListScreen> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const SizedBox(height: 20),
-                                  Text(product.title ?? '', maxLines: 1),
-                                  const SizedBox(height: 5),
+                                  Padding(padding: const EdgeInsets.symmetric(horizontal: 8),
+                                  child: Column(children: [
+                                    const SizedBox(height: 20),
+                                    Text(product.title ?? '', maxLines: 1),
+                                    const SizedBox(height: 5),
+                                  ]),
+                                  ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 8),
                                     child: Row(
