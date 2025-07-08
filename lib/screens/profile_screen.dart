@@ -1,3 +1,4 @@
+import 'package:e_cart_flutter/utils/string.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -114,13 +115,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Material(
-                color: Colors.cyanAccent, // ✅ Set background color HERE
+                color: Colors.cyanAccent,
                 borderRadius: BorderRadius.circular(12),
                 child: InkWell(
                   borderRadius: BorderRadius.circular(12),
                   onTap: () {
                     SnackBar snackBar = const SnackBar(
-                      content: Text('Sign Out success!'),
+                      content: Text(AppStrings.signOutSuccess),
                       duration: Duration(seconds: 2),
                     );
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -130,7 +131,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Row(
                       children: [
                         Text(
-                          'Sign Out',
+                          AppStrings.signOut,
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.normal,

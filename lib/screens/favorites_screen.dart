@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../providers/favorite_provider.dart';
 import '../utils/sqflite_storage.dart';
+import '../utils/string.dart';
 
 class FavoritesScreen extends ConsumerStatefulWidget {
   const FavoritesScreen({super.key});
@@ -42,7 +43,7 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
       body: productListItems.isEmpty
           ? const Center(
               child: Text(
-                'No favorite products found',
+                AppStrings.emptyFavorites,
                 style: TextStyle(fontSize: 16, color: Colors.black54),
               ),
             )
