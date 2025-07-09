@@ -1,3 +1,4 @@
+import 'package:e_cart_flutter/utils/string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:e_cart_flutter/screens/cart_screen.dart';
@@ -69,7 +70,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       appBar: AppBar(
         titleSpacing: -2,
         title:
-            const Text('Electronic Cart 2025', style: TextStyle(fontSize: 16)),
+            const Text(AppStrings.appTitle, style: TextStyle(fontSize: 16)),
         leading: Lottie.network(
           'https://lottie.host/b239f9be-2fbf-47b9-9347-4544f7c8a395/Kyn33rsL3W.json',
           width: 30,

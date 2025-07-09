@@ -1,3 +1,4 @@
+import 'package:e_cart_flutter/utils/string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:e_cart_flutter/models/model_produts_list.dart';
@@ -12,11 +13,13 @@ class ProductDetailsScreen extends ConsumerStatefulWidget {
   const ProductDetailsScreen({super.key});
 
   @override
-  ConsumerState<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
+  ConsumerState<ProductDetailsScreen> createState() =>
+      _ProductDetailsScreenState();
 }
 
 class _ProductDetailsScreenState extends ConsumerState<ProductDetailsScreen> {
   final db = SqFlightStorage();
+
 
   @override
   initState() {
@@ -49,7 +52,11 @@ class _ProductDetailsScreenState extends ConsumerState<ProductDetailsScreen> {
                 iconSize: 25,
               ),
               onPressed: () {
-                Navigator.pushNamed(context,'/home', arguments: 1, );
+                Navigator.pushNamed(
+                  context,
+                  '/home',
+                  arguments: 1,
+                );
               },
             ),
           ]),
@@ -121,55 +128,65 @@ class _ProductDetailsScreenState extends ConsumerState<ProductDetailsScreen> {
                 ),
               ),
               const SizedBox(height: 140),
-              SizedBox(
-                height: 50,
-                width: double.infinity,
-                child: TextButton.icon(
-                  key: const Key('add_to_cart_button'),
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.cyan,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                  ),
-                  onPressed: () {
-                    SqFlightStorage().insertProductToCart(product);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Product added to cart!'),
-                        duration: Duration(seconds: 2),
-                      ),
-                    );
-                    ref.read(cartItemsProvider.notifier).refreshCart();
-                    ref.read(allFavoriteProductProvider.notifier).refreshFavorites();
-                  },
-                  icon: const Icon(Icons.shopping_bag),
-                  label: const Text('Add to Cart'),
-                ),
-              )
-            ]),
-            Positioned(
-              top: 15,
-              left: 350,
-              child: GestureDetector(
-                onTap: () async {
-                  setState(() {
-                    product.favorite = !product.favorite;
-                  });
-                  await SqFlightStorage()
-                      .updateFavoriteStatus(product.id!, product.favorite);
-                  ref.read(allFavoriteProductProvider.notifier).refreshAllProducts();
-                },
-                child: CircleAvatar(
-                  backgroundColor: Colors.grey.shade200,
-                  radius: 20,
-                  child: Icon(
-                    product.favorite ? Icons.favorite : Icons.favorite_border,
-                    color: product.favorite ? Colors.red : Colors.black,
-                    size: 25,
-                  ),
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                      height: 50,
+                      width: 50,
+                      child: GestureDetector(
+                        onTap: () async {
+                          setState(() {
+                            product.favorite = !product.favorite;
+                          });
+                          await SqFlightStorage().updateFavoriteStatus(
+                              product.id!, product.favorite);
+                          ref
+                              .read(allFavoriteProductProvider.notifier)
+                              .refreshAllProducts();
+                        },
+                        child: CircleAvatar(
+                          backgroundColor: Colors.grey.shade200,
+                          radius: 20,
+                          child: Icon(
+                            product.favorite
+                                ? Icons.favorite
+                                : Icons.favorite_border,
+                            color: product.favorite ? Colors.red : Colors.black,
+                            size: 25,
+                          ),
+                        ),
+                      )),
+                  const SizedBox(width: 10),
+                  SizedBox(
+                      height: 50,
+                      width: MediaQuery.of(context).size.width - 100,
+                      child: TextButton.icon(
+                        key: const Key('add_to_cart_button'),
+                        style: TextButton.styleFrom(
+                          backgroundColor: Colors.cyan,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 15),
+                        ),
+                        onPressed: () {
+                          SqFlightStorage().insertProductToCart(product);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(AppStrings.productAddedCart),
+                              duration: Duration(seconds: 2),
+                            ),
+                          );
+                          ref.read(cartItemsProvider.notifier).refreshCart();
+                          ref
+                              .read(allFavoriteProductProvider.notifier)
+                              .refreshFavorites();
+                        },
+                        icon: const Icon(Icons.shopping_cart_checkout),
+                        label: const Text(AppStrings.addToCart),
+                      )),
+                ],
               ),
-            ),
+            ]),
           ],
         ),
       )),

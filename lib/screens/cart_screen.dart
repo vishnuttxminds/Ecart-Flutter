@@ -1,7 +1,9 @@
 import 'dart:ffi';
 
+import 'package:e_cart_flutter/utils/string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:showcaseview/showcaseview.dart';
 
 import '../animation/animation.dart';
@@ -179,9 +181,18 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                             return index == 0 && showShowcase
                                 ? Showcase(
                                     key: _cartItemKey,
-                                    title: 'For Delete',
-                                    description:
-                                        'Slide left to delete an item from the cart.',
+                                    title: AppStrings.forDelete,
+                                    description:AppStrings.slideLeftToDelete,
+                                    titleTextStyle: GoogleFonts.roboto(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.normal,
+                                      color: Colors.black,
+                                    ),
+                                    descTextStyle: GoogleFonts.roboto(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
                                     child: itemWidget,
                                   )
                                 : itemWidget;
@@ -206,7 +217,7 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 const Text(
-                                  'Total Amount : ',
+                                  AppStrings.totalAmount,
                                   style: TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold),
@@ -234,7 +245,7 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                               cartTotal.toStringAsFixed(2) == '0.00'
                                   ? ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
-                                        content: Text('Cart is empty!'),
+                                        content: Text(AppStrings.emptyCart),
                                         duration: Duration(seconds: 2),
                                       ),
                                     )
@@ -246,7 +257,7 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                                     );
                             },
                             icon: const Icon(Icons.local_shipping_sharp),
-                            label: const Text('Place Order'),
+                            label: const Text(AppStrings.placeOrder),
                           ),
                         )
                       ],
