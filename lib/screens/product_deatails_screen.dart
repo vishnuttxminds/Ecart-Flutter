@@ -20,6 +20,7 @@ class ProductDetailsScreen extends ConsumerStatefulWidget {
 class _ProductDetailsScreenState extends ConsumerState<ProductDetailsScreen> {
   final db = SqFlightStorage();
 
+
   @override
   initState() {
     super.initState();
@@ -127,58 +128,65 @@ class _ProductDetailsScreenState extends ConsumerState<ProductDetailsScreen> {
                 ),
               ),
               const SizedBox(height: 140),
-              SizedBox(
-                  height: 50,
-                  width: double.infinity,
-                  child: TextButton.icon(
-                    key: const Key('add_to_cart_button'),
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.cyan,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(vertical: 15),
-                    ),
-                    onPressed: () {
-                      SqFlightStorage().insertProductToCart(product);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text(AppStrings.productAddedCart),
-                          duration: Duration(seconds: 2),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                      height: 50,
+                      width: 50,
+                      child: GestureDetector(
+                        onTap: () async {
+                          setState(() {
+                            product.favorite = !product.favorite;
+                          });
+                          await SqFlightStorage().updateFavoriteStatus(
+                              product.id!, product.favorite);
+                          ref
+                              .read(allFavoriteProductProvider.notifier)
+                              .refreshAllProducts();
+                        },
+                        child: CircleAvatar(
+                          backgroundColor: Colors.grey.shade200,
+                          radius: 20,
+                          child: Icon(
+                            product.favorite
+                                ? Icons.favorite
+                                : Icons.favorite_border,
+                            color: product.favorite ? Colors.red : Colors.black,
+                            size: 25,
+                          ),
                         ),
-                      );
-                      ref.read(cartItemsProvider.notifier).refreshCart();
-                      ref
-                          .read(allFavoriteProductProvider.notifier)
-                          .refreshFavorites();
-                    },
-                    icon: const Icon(Icons.shopping_bag),
-                    label: const Text(AppStrings.addToCart),
-                  ))
-            ]),
-            Positioned(
-              top: 15,
-              left: 350,
-              child: GestureDetector(
-                onTap: () async {
-                  setState(() {
-                    product.favorite = !product.favorite;
-                  });
-                  await SqFlightStorage()
-                      .updateFavoriteStatus(product.id!, product.favorite);
-                  ref
-                      .read(allFavoriteProductProvider.notifier)
-                      .refreshAllProducts();
-                },
-                child: CircleAvatar(
-                  backgroundColor: Colors.grey.shade200,
-                  radius: 20,
-                  child: Icon(
-                    product.favorite ? Icons.favorite : Icons.favorite_border,
-                    color: product.favorite ? Colors.red : Colors.black,
-                    size: 25,
-                  ),
-                ),
+                      )),
+                  const SizedBox(width: 10),
+                  SizedBox(
+                      height: 50,
+                      width: MediaQuery.of(context).size.width - 100,
+                      child: TextButton.icon(
+                        key: const Key('add_to_cart_button'),
+                        style: TextButton.styleFrom(
+                          backgroundColor: Colors.cyan,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 15),
+                        ),
+                        onPressed: () {
+                          SqFlightStorage().insertProductToCart(product);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(AppStrings.productAddedCart),
+                              duration: Duration(seconds: 2),
+                            ),
+                          );
+                          ref.read(cartItemsProvider.notifier).refreshCart();
+                          ref
+                              .read(allFavoriteProductProvider.notifier)
+                              .refreshFavorites();
+                        },
+                        icon: const Icon(Icons.shopping_cart_checkout),
+                        label: const Text(AppStrings.addToCart),
+                      )),
+                ],
               ),
-            ),
+            ]),
           ],
         ),
       )),

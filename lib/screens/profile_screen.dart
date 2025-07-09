@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'package:e_cart_flutter/utils/string.dart';
+import 'package:e_cart_flutter/widgets/image_picker.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -9,6 +11,11 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  File? _selectedImage;
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,21 +29,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             Align(
               child: Column(children: [
-                Container(
-                  height: 130,
-                  width: 130,
-                  decoration: const BoxDecoration(
-                    border: Border.fromBorderSide(
-                      BorderSide(color: Colors.amber, width: 1),
-                    ),
-                    shape: BoxShape.circle,
-                    color: Colors.cyan,
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/sunil.jpg'),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                ImagePickerWidget(
+                  radius: 65,
+                  initialImage:  _selectedImage,
+                  imageUrl: null,
+                  onImageSelected: (File file) {
+                    setState(() {
+                      _selectedImage = file;
+                    });
+                  },
                 ),
+                // GestureDetector(
+                //   onTap: () {
+                //
+                //   },
+                //   child:
+                // Container(
+                //   height: 130,
+                //   width: 130,
+                //   decoration: const BoxDecoration(
+                //     border: Border.fromBorderSide(
+                //       BorderSide(color: Colors.amber, width: 1),
+                //     ),
+                //     shape: BoxShape.circle,
+                //     color: Colors.cyan,
+                //     image: DecorationImage(
+                //       image: AssetImage('assets/images/sunil.jpg'),
+                //       fit: BoxFit.cover,
+                //     ),
+                //   ),
+                // )
+                //   ,),
                 const SizedBox(width: 10),
                 const Text(
                   'Sunil Chhetri',
