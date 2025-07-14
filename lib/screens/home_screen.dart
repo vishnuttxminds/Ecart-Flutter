@@ -1,12 +1,11 @@
+import 'package:e_cart_flutter/screens/profile_screen.dart';
 import 'package:e_cart_flutter/utils/string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:e_cart_flutter/screens/cart_screen.dart';
 import 'package:e_cart_flutter/screens/product_list_screen.dart';
-import 'package:e_cart_flutter/screens/profile_screen.dart';
 import 'package:e_cart_flutter/services/api_service.dart';
 import 'package:lottie/lottie.dart';
-
 import '../models/model_produts_list.dart';
 import '../providers/cart_provider.dart';
 import '../utils/shared_preferences.dart';
@@ -71,8 +70,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         titleSpacing: -2,
         title:
             const Text(AppStrings.appTitle, style: TextStyle(fontSize: 16)),
-        leading: Lottie.network(
-          'https://lottie.host/b239f9be-2fbf-47b9-9347-4544f7c8a395/Kyn33rsL3W.json',
+        leading: Lottie.asset(
+          'assets/animations/logo_json.json',
           width: 30,
           height: 20,
           fit: BoxFit.contain,

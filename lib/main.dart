@@ -1,9 +1,9 @@
 import 'package:e_cart_flutter/screens/cart_screen.dart';
 import 'package:e_cart_flutter/screens/favorites_screen.dart';
 import 'package:e_cart_flutter/screens/home_screen.dart';
+import 'package:e_cart_flutter/screens/login_screen.dart';
 import 'package:e_cart_flutter/screens/product_deatails_screen.dart';
 import 'package:e_cart_flutter/screens/spash_screen.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
         '/productDetails': (context) => const ProductDetailsScreen(),
         '/cartScreen': (context) => const CartScreen(),
         '/favorites': (context) => const FavoritesScreen(),
+        '/loginScreen': (context) => const LoginScreen(),
 
       },
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),

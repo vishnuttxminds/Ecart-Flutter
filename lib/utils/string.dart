@@ -13,5 +13,8 @@ class AppStrings  {
   static const String placeOrder = 'Place Order';
   static const String signOutSuccess = 'Sign Out success!';
   static const String signOut = 'Sign Out';
+  static const String login = 'Login';
+  static const String pleaseFillUsernamePassword = 'Please fill the username and password.';
+  static const String enterValidEmail ='Please enter a valid email address.';
 
 }

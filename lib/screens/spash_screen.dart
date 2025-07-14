@@ -1,7 +1,6 @@
+import 'package:e_cart_flutter/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-
-import 'home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,8 +15,8 @@ class _SplashScreen extends State<SplashScreen> {
     return Container(
       color: Colors.white,
       child: Center(
-        child: Lottie.network(
-          'https://lottie.host/b239f9be-2fbf-47b9-9347-4544f7c8a395/Kyn33rsL3W.json',
+        child: Lottie.asset(
+          'assets/animations/logo_json.json',
           width: 300,
           height: 300,
           fit: BoxFit.contain,
@@ -32,7 +31,7 @@ class _SplashScreen extends State<SplashScreen> {
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
+        MaterialPageRoute(builder: (context) => const LoginScreen()),
       );
     });
   }
